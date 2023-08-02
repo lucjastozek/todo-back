@@ -8,6 +8,7 @@ import {
   getDbItemById,
   DbItem,
   updateDbItemById,
+  deleteDbItemById,
 } from "./db";
 import filePath from "./filePath";
 
@@ -67,6 +68,8 @@ app.delete<{ id: string }>("/items/:id", (req, res) => {
   } else {
     res.status(200).json(matchingSignature);
   }
+
+  deleteDbItemById(parseInt(req.params.id));
 });
 
 // PATCH /items/:id
