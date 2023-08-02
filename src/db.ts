@@ -1,5 +1,10 @@
+import moment from "moment";
+
 export interface DbItem {
-  // sketch out interface here
+  description: string;
+  creationDate: string;
+  dueDate: string;
+  status: "new" | "in progress" | "complete";
 }
 
 export interface DbItemWithId extends DbItem {
@@ -21,7 +26,10 @@ export const addDummyDbItems = (n: number): DbItemWithId[] => {
   const createdSignatures: DbItemWithId[] = [];
   for (let count = 0; count < n; count++) {
     const createdSignature = addDbItem({
-      // possibly add some generated data here
+      description: "start packing",
+      creationDate: "02/08/2023",
+      dueDate: "04/08/2023",
+      status: "new",
     });
     createdSignatures.push(createdSignature);
   }
@@ -34,10 +42,21 @@ export const addDummyDbItems = (n: number): DbItemWithId[] => {
  * @param data - the item data to insert in
  * @returns the item added (with a newly created id)
  */
-export const addDbItem = (data: DbItem): DbItemWithId => {
+export const addDbItem = ({
+  description,
+  creationDate,
+  dueDate,
+  status,
+}: DbItem): DbItemWithId => {
   const newEntry: DbItemWithId = {
     id: ++idCounter,
-    ...data,
+    description: description ?? "do something",
+    creationDate: creationDate ?? moment().format("DD/MM/YYYY"),
+    dueDate:
+      dueDate ?? creationDate
+        ? moment(creationDate, "DD/MM/YYYY").add(1, "day").format("DD/MM/YYYY")
+        : moment().add(1, "day").format("DD/MM/YYYY"),
+    status: status ?? "new",
   };
   db.push(newEntry);
   return newEntry;
