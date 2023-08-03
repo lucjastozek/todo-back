@@ -52,10 +52,7 @@ export const addDbItem = ({
     id: ++idCounter,
     description: description ?? "do something",
     creationDate: creationDate ?? moment().format("DD/MM/YYYY"),
-    dueDate:
-      dueDate ?? creationDate
-        ? moment(creationDate, "DD/MM/YYYY").add(1, "day").format("DD/MM/YYYY")
-        : moment().add(1, "day").format("DD/MM/YYYY"),
+    dueDate: dueDate ?? moment().add(1, "day").format("DD/MM/YYYY"),
     status: status ?? "new",
   };
   db.push(newEntry);

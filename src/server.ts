@@ -85,7 +85,6 @@ app.patch<{ id: string }, {}, Partial<DbItem>>("/items/:id", (req, res) => {
 app.put<{ id: string }, {}, Partial<DbItem>>("/items/:id", (req, res) => {
   const matchingSignature = updateDbItemById(parseInt(req.params.id), req.body);
   if (matchingSignature === "not found") {
-    updateDbItemById(parseInt(req.params.id), req.body);
     res.status(404).json(matchingSignature);
   } else {
     res.status(200).json(matchingSignature);
