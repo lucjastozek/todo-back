@@ -74,10 +74,10 @@ export const addDummyDbItems = (n: number): DbItemWithId[] => {
         nouns
       )}`,
       creationDate: moment()
-        .add(Math.floor(Math.random() * 5), "days")
+        .add(-Math.floor(Math.random() * 5), "days")
         .format("DD/MM/YYYY"),
       dueDate: moment()
-        .add(Math.floor(Math.random() * 10 + 5), "days")
+        .add(Math.floor(Math.random() * 10), "days")
         .format("DD/MM/YYYY"),
       status: "new",
     });
