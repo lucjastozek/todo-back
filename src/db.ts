@@ -16,6 +16,11 @@ const db: DbItemWithId[] = [];
 /** Variable to keep incrementing id of database items */
 let idCounter = 0;
 
+function random(array: string[]) {
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+}
+
 /**
  * Adds in some dummy database items to the database
  *
@@ -23,10 +28,51 @@ let idCounter = 0;
  * @returns the created items
  */
 export const addDummyDbItems = (n: number): DbItemWithId[] => {
+  const verbs = [
+    "walk",
+    "write",
+    "read",
+    "clean",
+    "cook",
+    "play",
+    "study",
+    "watch",
+    "code",
+    "exercise",
+  ];
+
+  const adjectives = [
+    "quick",
+    "lazy",
+    "tired",
+    "happy",
+    "sad",
+    "busy",
+    "bored",
+    "excited",
+    "calm",
+    "angry",
+  ];
+
+  const nouns = [
+    "dog",
+    "cat",
+    "book",
+    "room",
+    "food",
+    "movie",
+    "computer",
+    "garden",
+    "friend",
+    "phone",
+  ];
+
   const createdSignatures: DbItemWithId[] = [];
   for (let count = 0; count < n; count++) {
     const createdSignature = addDbItem({
-      description: "start packing",
+      description: `${random(verbs)} the ${random(adjectives)} ${random(
+        nouns
+      )}`,
       creationDate: "02/08/2023",
       dueDate: "04/08/2023",
       status: "new",
