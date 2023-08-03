@@ -73,8 +73,12 @@ export const addDummyDbItems = (n: number): DbItemWithId[] => {
       description: `${random(verbs)} the ${random(adjectives)} ${random(
         nouns
       )}`,
-      creationDate: "02/08/2023",
-      dueDate: "04/08/2023",
+      creationDate: moment()
+        .add(Math.floor(Math.random() * 5), "days")
+        .format("DD/MM/YYYY"),
+      dueDate: moment()
+        .add(Math.floor(Math.random() * 10 + 5), "days")
+        .format("DD/MM/YYYY"),
       status: "new",
     });
     createdSignatures.push(createdSignature);
